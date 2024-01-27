@@ -1,3 +1,16 @@
+Algorithm:
+Insertion Operation
+1. START
+2. If the tree is empty, insert the first element as the root node of the
+tree. The following elements are added as the leaf nodes.
+3. If an element is less than the root value, it is added into the left
+subtree as a leaf node.
+4. If an element is greater than the root value, it is added into the right
+subtree as a leaf node.
+5. The final leaf nodes of the tree point to NULL values as their
+child nodes.
+6. END
+
 BST
 {
 
