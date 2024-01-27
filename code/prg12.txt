@@ -1,0 +1,161 @@
+BST
+{
+
+int data;
+struct BST *left;
+struct BST *right;
+
+};
+
+typedef struct BST NODE;
+NODE *node;
+NODE* createtree(NODE *node, int data)
+
+{
+
+if (node == NULL)
+{
+
+NODE *temp;
+temp= (NODE*)malloc(sizeof(NODE));
+temp->data = data;
+temp->left = temp->right = NULL;
+return temp;
+}
+
+if (data < (node->data))
+{
+node->left = createtree(node->left, data);
+}
+
+else if (data > node->data)
+{
+node -> right = createtree(node->right, data);
+}
+
+return node;
+
+}
+
+int countnodes(NODE *root)
+{
+if(root != NULL)
+{
+countnodes(root->left);
+count++;
+countnodes(root->right);
+}
+return count;
+}
+
+void mirror(NODE *node)
+{
+if (node == NULL)
+return;
+else {
+NODE *temp;
+
+/* do the subtrees */
+mirror(node->left);
+mirror(node->right);
+
+/* swap the pointers in this node */
+temp = node->left;
+node->left = node->right;
+node->right = temp;
+}
+}
+
+void print2DUtil(NODE * root, int space)
+
+{
+// Base case
+if (root == NULL)
+return;
+
+// Increase distance between levels
+space += COUNT;
+
+// Process right child first
+print2DUtil(root->right, space);
+
+// Print current node after space
+// count
+printf("\n");
+for (int i = COUNT; i < space; i++)
+printf(" ");
+printf("%d\n", root->data);
+
+// Process left child
+print2DUtil(root->left, space);
+}
+
+// Wrapper over print2DUtil()
+void print2D(NODE *root)
+{
+// Pass initial space count as 0
+print2DUtil(root, 0);
+}
+unsigned int getLeafCount(NODE * node)
+{
+
+if(node == NULL)
+return 0;
+if(node->left == NULL && node->right==NULL)
+return 1;
+else
+return getLeafCount(node->left)+
+getLeafCount(node->right);
+}
+int main()
+{
+int data, ch, i, n;
+NODE *root=NULL;
+while (ch!=6)
+{
+printf("\n\n1.Insertion in Binary Search Tree");
+printf("\n2.Mirroring a Tree");
+printf("\n3.Display a Tree");
+printf("\n4.Count Total No. Of nodes in the Tree");
+printf("\n5.Count only Leaf Nodes");
+printf("\n6.Exit\n");
+printf("\nEnter your Choice: ");
+
+scanf("%d", &ch);
+
+switch (ch)
+{
+case 1: printf("\nEnter size of tree: " );
+scanf("%d", &n);
+printf("\nEnter the elements of tree)\n");
+
+for(i=0; i<n; i++)
+{
+scanf("%d", &data);
+root=createtree(root, data);
+}
+break;
+
+case 2:
+mirror(root);
+printf("\nMIRRORING of the Tree is Done\n");
+break;
+
+case 3: printf("\n PRINT a Tree: \n");
+print2D(root);
+break;
+
+case 4: printf("\n Total no. of nodes in the Tree is %d \n", countnodes(root));
+break;
+
+case 5: printf("\n No. of Leaf Nodes in the tree is %d \n",getLeafCount(root));
+break;
+
+case 6: exit(0);
+
+default: printf("\nEnter valid choice\n");
+break;
+
+}
+}
+}

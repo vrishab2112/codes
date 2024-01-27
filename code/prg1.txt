@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+void towers(int, char, char, char);
+
+int main()
+{
+int num;
+
+printf("Enter the number of disks : ");
+scanf("%d", &num);
+printf("The sequence of moves involved in the Tower of Hanoi are :\n");
+towers(num, 'A', 'C', 'B');
+return 0;
+}
+void towers(int num, char beg, char aux, char end)
+{
+// Base Condition if no of disks are
+if (num >= 1)
+
+{
+// Recursively calling function twice
+towers(num - 1, beg, end, aux);
+printf("\n Move disk %d from peg %c to peg %c", num, beg, end);
+towers(num - 1, aux, beg, end);
+}
+}
+
+START
+Procedure Hanoi(disk, source, dest, aux)
+
+IF disk == 1, THEN
+move disk from source to dest
+ELSE
+Hanoi(disk - 1, source, aux, dest) // Step 1
+move disk from source to dest // Step 2
+Hanoi(disk - 1, aux, dest, source) // Step 3
+END IF
+
+END Procedure
+STOP
+

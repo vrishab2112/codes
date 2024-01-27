@@ -1,0 +1,43 @@
+if(q[i]=='(')
+stk[++top]='(';
+else
+if(q[i]=='+'||q[i]=='-'||q[i]=='*'||q[i]=='/'||q[i]=='%'||q[i]=='^')
+{
+while(priority(stk[top])>=priority(q[i]))
+p[j++]=stk[top--];
+stk[++top]=q[i];
+}
+else
+if(q[i]==')')
+{
+while(stk[top]!='(')
+p[j++]=stk[top--];
+top--;
+}
+printf("\n");
+printf("%c",q[i]);
+printf("\t");
+for(k=0;k<=top;k++)
+printf("%c",stk[k]);
+printf("\t");
+for(l=0;l<=j;l++);
+printf("%c",p[l]);
+i++;
+}
+p[j]='\0';
+printf("\n Postfix is =%s",p);
+
+}
+int priority(char ch)
+{
+switch(ch)
+{
+case '^':return 3;
+case '*':
+case '/':
+case '%':return 2;
+case '+':
+case '-':return 1;
+default:return 0;
+}
+}
